@@ -1,4 +1,4 @@
-import {cart,removeFromCart} from '../data/carts.js';
+import {cart,removeFromCart} from '../data/cart.js';
 import{products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
@@ -10,7 +10,7 @@ cart.forEach((cartItem) =>
 
     let matchingProduct;
     products.forEach((product)=>{
-        if(product.id ===productId)
+        if(product.id === productId)
         {
             matchingProduct = product;
         }
@@ -39,7 +39,7 @@ cart.forEach((cartItem) =>
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary js-delete-link data-product-id = "${matchingProduct.id}">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id = "${matchingProduct.id}">
                     Delete
                   </span> 
                 </div>
@@ -98,22 +98,17 @@ cart.forEach((cartItem) =>
     .innerHTML = cartSummaryHTML;
 
 
-    document.querySelector('.js-delete-link')
-    .forEach((link)=>{
+    document.querySelectorAll('.js-delete-link')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      // remove the item and update the HTML for the page
+      const productId = link.dataset.productId;
 
-      link.addEventListener('click', ()=>{
+      removeFromCart(productId);
 
-        //remove the item and update the html for the page
-
-        const productId = link.dataset.productId;
-
-        removeFromCart(productId);
-
-
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.remove();
-      });
-
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+      container.remove();
     });
+  });
