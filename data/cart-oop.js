@@ -1,10 +1,12 @@
-const cart = {
+function Cart(localStorageKey)
+{
+  const cart = {
     cartItems: undefined,
 
     
 loadFromStorage()
 {
-  this.cartItems = JSON.parse(localStorage.getItem('cart')); //to convert it back to array
+  this.cartItems = JSON.parse(localStorage.getItem(localStorageKey)); //to convert it back to array
 
 if(!this.cartItems)
 {  this.cartItems = 
@@ -23,26 +25,18 @@ if(!this.cartItems)
     }
 ];
 }
-}
+},
 
-};
-
-
-loadFromStorage();
-
-
-
-function saveToStorage()
+saveToStorage()
 {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
+},
 
-}
-
-export function addToCart(productId)
+addToCart(productId)
 {  
   let matchingItem;
 
-  cart.forEach((cartItem) => 
+  this.cartItems.forEach((cartItem) => 
   {
     if(productId === cartItem.productId)
     {
@@ -56,7 +50,7 @@ export function addToCart(productId)
   }
   else
   {
-    cart.push(
+    this.cartItems.push(
     {
       productId: productId,
       quantity: 1,
@@ -64,15 +58,17 @@ export function addToCart(productId)
     }
   );
   }
-  saveToStorage();
+  this.saveToStorage();
 
-}
+},
 
-export function removeFromCart(productId)
+
+
+removeFromCart(productId)
 {
   const newCart = [];
 
-  cart.forEach((cartItem) =>{
+  this.cartItems.forEach((cartItem) =>{
 
     if(cartItem.productId != productId)
     {
@@ -81,16 +77,17 @@ export function removeFromCart(productId)
 
   })
 
-  cart = newCart;
-  saveToStorage();
+  this.cartItems = newCart;
+  this.saveToStorage();
   
-}
+},
 
-export function updateDeliveryOption(productId,deliveryOptionId)
+
+updateDeliveryOption(productId,deliveryOptionId)
 {
   let matchingItem;
 
-  cart.forEach((cartItem) => 
+  this.cartItems.forEach((cartItem) => 
   {
     if(productId === cartItem.productId)
     {
@@ -100,8 +97,20 @@ export function updateDeliveryOption(productId,deliveryOptionId)
 
   matchingItem.deliveryOptionId = deliveryOptionId;
 
-  saveToStorage();
+  this.saveToStorage();
+}
+};
 
 
+return cart;
 
 }
+
+const cart = Cart('cart-oop');
+const businessCart = Cart('cart-business');
+
+
+cart.loadFromStorage();
+
+businessCart.loadFromStorage();
+
