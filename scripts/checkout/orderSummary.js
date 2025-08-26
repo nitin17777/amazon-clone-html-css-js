@@ -28,9 +28,11 @@ export function renderOrderSummary() {
           <img class="product-image" src="${matchingProduct.image}">
           <div class="cart-item-details">
             <div class="product-name">${matchingProduct.name}</div>
-            <div class="product-price">$${formatCurrency(matchingProduct.priceCents)}</div>
+            <div class="product-price">
+            ${matchingProduct.getPrice()}
+            </div>
             <div class="product-quantity">
-              <span>
+              <span>s
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
               </span>
               <span class="update-quantity-link link-primary">Update</span>
