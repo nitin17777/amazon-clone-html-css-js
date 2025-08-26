@@ -72,7 +72,21 @@ class Product
       `;
     }
   }
+
+  //const date = new Date();
+
+// const object2 = 
+// {
+//   a: 2,
+//   b:this.a
+
+// }
+
+function logThis()
+{
   
+}
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -739,7 +753,5 @@ export const products = [
   {
     return new Clothing(productDetails);
   }
-  return new Product(productDetails);
-  
+  return new Product(productDetails); 
 });
-
