@@ -29,7 +29,7 @@ class Product
     this.image = productDetails.image;
     this.name = productDetails.name;
     this.rating = productDetails.rating;
-    this.priceCents = productDetails.priceCents();
+    this.priceCents = productDetails.priceCents;
   }
 
   getStarsUrl()
@@ -82,10 +82,7 @@ class Product
 
 // }
 
-function logThis()
-{
-  
-}
+
 
 export const products = [
   {
