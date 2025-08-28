@@ -781,4 +781,3 @@ export function loadProducts(fun)
   xhr.open('GET', 'https://supersimplebackend.dev');
   xhr.send();
 }
-
